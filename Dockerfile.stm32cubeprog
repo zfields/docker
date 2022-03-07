@@ -1,7 +1,7 @@
 # Container for updating STM32 firmware
 
 # Build development environment
-# $ docker build --tag stm32_programmer_cli .
+# $ docker build --file Dockerfile.stm32cubeprog --tag stm32_programmer_cli .
 
 # Launch development environment
 # (be sure to place the binary in your local ~/Downloads folder)
@@ -29,7 +29,7 @@ FROM ubuntu:20.04
 ARG DEBIAN_FRONTEND
 
 # Local Argument(s)
-ARG STM32CUBEPROG_CHECKSUM="7c53892086c29a9eaf2710578ce57f69"
+ARG STM32CUBEPROG_CHECKSUM="a51f7497eb3d3eb8cb430bd564284a26"
 
 # Establish Environment
 RUN ["dash", "-c", "\
@@ -52,12 +52,12 @@ WORKDIR /root
 
 # Download/Install STM32CubeProg Utilities
 RUN ["dash", "-c", "\
-    curl -SLO# https://www.st.com/content/ccc/resource/technical/software/utility/group0/af/f8/e3/60/56/b9/42/9d/stm32cubeprg-lin_v2-9-0/files/stm32cubeprg-lin_v2-9-0.zip/jcr:content/translations/en.stm32cubeprg-lin_v2-9-0.zip \
- && md5sum en.stm32cubeprg-lin_v2-9-0.zip \
- && echo \"${STM32CUBEPROG_CHECKSUM} en.stm32cubeprg-lin_v2-9-0.zip\" | md5sum -c - \
- && unzip en.stm32cubeprg-lin_v2-9-0.zip -d STM32CubeProgrammer-2.9.0 \
- && printf \"1\\n1\\n1\\n\\nO\\n1\\nY\\nN\\nN\\n1\\nN\\nN\\n\" | STM32CubeProgrammer-2.9.0/SetupSTM32CubeProgrammer-2.9.0.linux \
- && rm -rf en.stm32cubeprg-lin_v2-9-0.zip STM32CubeProgrammer-2.9.0 \
+    curl -SLO# https://www.st.com/content/ccc/resource/technical/software/utility/group0/2b/58/90/97/ad/a1/46/10/stm32cubeprg-lin_v2-10-0/files/stm32cubeprg-lin_v2-10-0.zip/jcr:content/translations/en.stm32cubeprg-lin_v2-10-0.zip \
+ && md5sum en.stm32cubeprg-lin_v2-10-0.zip \
+ && echo \"${STM32CUBEPROG_CHECKSUM} en.stm32cubeprg-lin_v2-10-0.zip\" | md5sum -c - \
+ && unzip en.stm32cubeprg-lin_v2-10-0.zip -d STM32CubeProgrammer-2.10.0 \
+ && printf \"1\\n1\\n1\\n\\nO\\n1\\nY\\nN\\nN\\n1\\nN\\nN\\n\" | STM32CubeProgrammer-2.10.0/SetupSTM32CubeProgrammer-2.10.0.linux \
+ && rm -rf en.stm32cubeprg-lin_v2-10-0.zip STM32CubeProgrammer-2.10.0 \
 "]
 
 ENV PATH=/usr/local/STMicroelectronics/STM32Cube/STM32CubeProgrammer/bin:${PATH}
