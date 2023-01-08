@@ -48,7 +48,7 @@ RUN ["dash", "-c", "\
  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
 "]
 
-WORKDIR /root
+WORKDIR /host-volume
 
 # Download/Install STM32CubeProg Utilities
 RUN ["dash", "-c", "\
